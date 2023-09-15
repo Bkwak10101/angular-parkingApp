@@ -1,19 +1,31 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
-import { MapComponent } from './component/map/map.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {AppComponent} from './app.component';
+import { RouterModule, Routes } from '@angular/router'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LoginModule} from "./component/login/login.module";
+import {LoginComponent} from "./component/login/login.component";
+
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+]
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    LoginModule,
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, LoginComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
