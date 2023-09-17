@@ -1,9 +1,9 @@
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-content>
-    <mat-card-header>
-      <mat-card-title>Sign in</mat-card-title>
-    </mat-card-header>
+      <mat-card-header>
+        <mat-card-title>Sign in</mat-card-title>
+      </mat-card-header>
       <form>
         <div class="form-group">
           <mat-form-field>
@@ -24,7 +24,7 @@
         </div>
         <button mat-raised-button type="submit" class="login-button">Log in</button>
       </form>
-      <p><a href="#">Sign up</a></p>
+      <button mat-raised-button color=primary (click)="goToSignUp()">Sign up</button>
     </mat-card-content>
   </mat-card>
 </div>

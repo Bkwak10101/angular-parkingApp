@@ -2,15 +2,9 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
-import { RouterModule, Routes } from '@angular/router'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {LoginModule} from "./component/login/login.module";
-import {LoginComponent} from "./component/login/login.component";
-
-const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-]
+import {CommonModule} from "@angular/common";
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,12 +14,12 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    LoginModule,
+    AppRoutingModule,
     BrowserModule,
-    RouterModule.forRoot(routes)
+    CommonModule,
   ],
   providers: [],
-  bootstrap: [AppComponent, LoginComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
