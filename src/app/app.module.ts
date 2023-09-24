@@ -5,6 +5,8 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from "@angular/common";
 import {AppRoutingModule} from './app-routing.module';
+import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import {AppRoutingModule} from './app-routing.module';
     AppRoutingModule,
     BrowserModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

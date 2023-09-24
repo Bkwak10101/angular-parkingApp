@@ -4,17 +4,16 @@
       <mat-card-header>
         <mat-card-title>Sign up</mat-card-title>
       </mat-card-header>
-      <form>
+      <form (ngSubmit)="addData()" [formGroup]="userForm" >
         <div class="form-group">
           <mat-form-field>
             <mat-label>User name</mat-label>
-            <input matInput placeholder="Adam123" required>
-            <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+            <input formControlName="username" matInput placeholder="Adam123" required>
           </mat-form-field>
           <div class="form-group">
             <mat-form-field>
               <mat-label>Password</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'">
+              <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                       [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -23,12 +22,11 @@
           </div>
           <mat-form-field>
             <mat-label>E-mail</mat-label>
-            <input matInput placeholder="user@example.com" required>
-            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            <input formControlName="email" matInput placeholder="user@example.com" required>
           </mat-form-field>
         </div>
+      <button mat-raised-button color=primary type="submit">Sign up</button>
       </form>
-      <button mat-raised-button color=primary (click)="goToLogin()">Sign up</button>
     </mat-card-content>
   </mat-card>
 </div>

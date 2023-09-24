@@ -1,8 +1,21 @@
 import {Component} from '@angular/core';
-import {AbstractControl, FormControl, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
+
 import {Router} from '@angular/router';
 import {MaterialModule} from "../../material.module";
-import {NgIf} from "@angular/common";
+import {CommonModule, NgIf} from "@angular/common";
+import {HttpClient} from '@angular/common/http';
+import {FormGroup, FormControl} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
+import {UserService} from "../../services/user-client.service";
+import {User} from 'src/app/model/user';
 
 export function usernameValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -39,40 +52,74 @@ export function passwordValidator(): ValidatorFn {
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [MaterialModule, NgIf],
+  imports: [MaterialModule, NgIf, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  providers: [HttpClient]
 })
 export class SignupComponent {
 
-  constructor(private router: Router) {
-  }
-
-  name = new FormControl('', [
-    Validators.required,
-    Validators.minLength(4),
-    usernameValidator()
-  ]);
-
-  password = new FormControl('', [
-    Validators.required,
-    passwordValidator()
-  ]);
-
-  email = new FormControl('', [Validators.required, Validators.email]);
-
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
-    return this.email.hasError('email')
-      ? 'Not a valid email' : (this.name.hasError('onlyLettersAndNumbers')
-        ? 'Username can only contain letters and numbers' : '');
-  }
-
-  goToLogin() {
-    this.router.navigate(['/login']);
-  }
+  baseUrl = "http://localhost:8080";
 
   hide = true;
-}
+
+  userForm = this.fb.group({
+    username: this.fb.control('', [Validators.required,
+      Validators.minLength(4),
+      usernameValidator()]),
+    password: this.fb.control('', [Validators.required,
+      passwordValidator()]),
+    email: this.fb.control('', [Validators.required, Validators.email])
+  });
+
+  constructor(private router: Router,
+              private http: HttpClient, private fb: FormBuilder,
+              private userService: UserService) {
+  }
+
+  addData() {
+    console.log(this.userForm.value);
+
+    // if (this.userForm.valid) { // Sprawdź, czy formularz jest ważny
+      const user: User = {
+        username: this.userForm.get('username')?.value,
+        password: this.userForm.get('password')?.value,
+        email: this.userForm.get('email')?.value
+      };
+      // };
+      console.log(user);
+
+
+      this.userService.addUser(user)
+      this.router.navigate(['/login']);
+    }
+  }
+
+
+// TODO:Implement validators
+  // name = new FormControl('', [
+  //   Validators.required,
+  //   Validators.minLength(4),
+  //   usernameValidator()
+  // ]);
+  //
+  // password = new FormControl('', [
+  //   Validators.required,
+  //   passwordValidator()
+  // ]);
+  //
+  // email = new FormControl('', [Validators.required, Validators.email]);
+
+
+
+
+  // TODO:Implement error handler
+  // getErrorMessage() {
+  //   if (this.email.hasError('required')) {
+  //     return 'You must enter a value';
+  //   }
+  //   return this.email.hasError('email')
+  //     ? 'Not a valid email' : (this.name.hasError('onlyLettersAndNumbers')
+  //       ? 'Username can only contain letters and numbers' : '');
+  // }
+
