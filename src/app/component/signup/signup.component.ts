@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {
   AbstractControl,
+  FormBuilder,
   FormsModule,
   ReactiveFormsModule,
   ValidationErrors,
@@ -12,12 +13,10 @@ import {Router} from '@angular/router';
 import {MaterialModule} from "../../material.module";
 import {CommonModule, NgIf} from "@angular/common";
 import {HttpClient} from '@angular/common/http';
-import {FormGroup, FormControl} from '@angular/forms';
-import {FormBuilder} from '@angular/forms';
 import {UserService} from "../../services/user-client.service";
 import {User} from 'src/app/model/user';
 
-export function usernameValidator(): ValidatorFn {
+export function nameValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
 
@@ -64,62 +63,64 @@ export class SignupComponent {
   hide = true;
 
   userForm = this.fb.group({
-    username: this.fb.control('', [Validators.required,
+    name: this.fb.control('', [Validators.required,
       Validators.minLength(4),
-      usernameValidator()]),
-    password: this.fb.control('', [Validators.required,
-      passwordValidator()]),
+      nameValidator()]),
+    surname: this.fb.control('', [Validators.required,
+      Validators.minLength(4),
+      nameValidator()]),
+    password: this.fb.control('', [Validators.required]),
+    phone: this.fb.control('', [Validators.required]),
     email: this.fb.control('', [Validators.required, Validators.email])
   });
 
-  constructor(private router: Router,
-              private http: HttpClient, private fb: FormBuilder,
+  constructor(private router: Router, private fb: FormBuilder,
               private userService: UserService) {
   }
 
   addData() {
-    console.log(this.userForm.value);
+    // console.log(this.userForm.value);
 
-    // if (this.userForm.valid) { // Sprawdź, czy formularz jest ważny
-      const user: User = {
-        username: this.userForm.get('username')?.value,
-        password: this.userForm.get('password')?.value,
-        email: this.userForm.get('email')?.value
-      };
-      // };
-      console.log(user);
+    const user: User = {
+      name: this.userForm.get('name')?.value,
+      surname: this.userForm.get('surname')?.value,
+      password: this.userForm.get('password')?.value,
+      phone: this.userForm.get('phone')?.value,
+      email: this.userForm.get('email')?.value
+    };
+    console.log(user);
 
 
-      this.userService.addUser(user)
-      this.router.navigate(['/login']);
-    }
+    this.userService.addUser(user).subscribe((response: User) => {
+      console.log(response);
+    });
+    this.router.navigate(['/login']);
   }
+}
 
 
 // TODO:Implement validators
-  // name = new FormControl('', [
-  //   Validators.required,
-  //   Validators.minLength(4),
-  //   usernameValidator()
-  // ]);
-  //
-  // password = new FormControl('', [
-  //   Validators.required,
-  //   passwordValidator()
-  // ]);
-  //
-  // email = new FormControl('', [Validators.required, Validators.email]);
+// name = new FormControl('', [
+//   Validators.required,
+//   Validators.minLength(4),
+//   usernameValidator()
+// ]);
+//
+// password = new FormControl('', [
+//   Validators.required,
+//   passwordValidator()
+// ]);
+//
+// email = new FormControl('', [Validators.required, Validators.email]);
 
 
-
-
-  // TODO:Implement error handler
-  // getErrorMessage() {
-  //   if (this.email.hasError('required')) {
-  //     return 'You must enter a value';
-  //   }
-  //   return this.email.hasError('email')
-  //     ? 'Not a valid email' : (this.name.hasError('onlyLettersAndNumbers')
-  //       ? 'Username can only contain letters and numbers' : '');
-  // }
+// TODO:Implement error handler
+// getErrorMessage() {
+//   if (this.email.hasError('required')) {
+//     return 'You must enter a value';
+//   }
+//   return this.email.hasError('email')
+//     ? 'Not a valid email' : (this.name.hasError('onlyLettersAndNumbers')
+//       ? 'Username can only contain letters and numbers' : '');
+// }
 

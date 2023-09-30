@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
 import {User} from "../model/user";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,11 +11,11 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  public addUser(user:User): Observable<any> {
-    const headers = { 'content-type': 'application/json'}
-    const body=JSON.stringify(user);
-    console.log(body)
-    return this.http.post(this.baseUrl, body,{'headers':headers})
+  public addUser(user: User) {
+    const headers = {'content-type': 'application/json'}
+    const body = user;
+
+    return this.http.post<any>(this.baseUrl + "/api/signup", body, {'headers': headers})
   }
 
 }

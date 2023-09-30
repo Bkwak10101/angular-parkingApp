@@ -4,28 +4,34 @@
       <mat-card-header>
         <mat-card-title>Sign up</mat-card-title>
       </mat-card-header>
-      <form (ngSubmit)="addData()" [formGroup]="userForm" >
+      <form (ngSubmit)="addData()" [formGroup]="userForm">
         <div class="form-group">
           <mat-form-field>
             <mat-label>User name</mat-label>
-            <input formControlName="username" matInput placeholder="Adam123" required>
+            <input formControlName="name" matInput placeholder="Adam" required>
           </mat-form-field>
-          <div class="form-group">
-            <mat-form-field>
-              <mat-label>Password</mat-label>
-              <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                      [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            </mat-form-field>
-          </div>
+          <mat-form-field>
+            <mat-label>User surname</mat-label>
+            <input formControlName="surname" matInput placeholder="Nowak" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>User phone</mat-label>
+            <input formControlName="phone" matInput placeholder="500110220" required>
+          </mat-form-field>
           <mat-form-field>
             <mat-label>E-mail</mat-label>
             <input formControlName="email" matInput placeholder="user@example.com" required>
           </mat-form-field>
         </div>
-      <button mat-raised-button color=primary type="submit">Sign up</button>
+        <button mat-raised-button color=primary type="submit">Sign up</button>
       </form>
     </mat-card-content>
   </mat-card>
