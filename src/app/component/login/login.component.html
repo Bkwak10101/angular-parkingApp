@@ -4,18 +4,16 @@
       <mat-card-header>
         <mat-card-title>Sign in</mat-card-title>
       </mat-card-header>
-      <form>
+      <form (ngSubmit)="sendCredentials()" [formGroup]="loginForm">
         <div class="form-group">
           <mat-form-field>
             <mat-label>Enter your email</mat-label>
-            <input matInput placeholder="user@example.com" required>
-            <mat-error>{{getErrorMessage()}}</mat-error>
+            <input formControlName = "email" matInput placeholder="user@example.com" required>
+<!--            <mat-error>{{getErrorMessage()}}</mat-error>-->
           </mat-form-field>
-        </div>
-        <div class="form-group">
           <mat-form-field>
             <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'">
+            <input formControlName = "password" matInput [type]="hide ? 'password' : 'text'">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

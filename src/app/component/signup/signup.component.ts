@@ -58,8 +58,6 @@ export function passwordValidator(): ValidatorFn {
 })
 export class SignupComponent {
 
-  baseUrl = "http://localhost:8080";
-
   hide = true;
 
   userForm = this.fb.group({
@@ -69,7 +67,7 @@ export class SignupComponent {
     surname: this.fb.control('', [Validators.required,
       Validators.minLength(4),
       nameValidator()]),
-    password: this.fb.control('', [Validators.required]),
+    password: this.fb.control('', [Validators.required, passwordValidator]),
     phone: this.fb.control('', [Validators.required]),
     email: this.fb.control('', [Validators.required, Validators.email])
   });
@@ -79,8 +77,6 @@ export class SignupComponent {
   }
 
   addData() {
-    // console.log(this.userForm.value);
-
     const user: User = {
       name: this.userForm.get('name')?.value,
       surname: this.userForm.get('surname')?.value,
@@ -88,12 +84,8 @@ export class SignupComponent {
       phone: this.userForm.get('phone')?.value,
       email: this.userForm.get('email')?.value
     };
-    console.log(user);
 
-
-    this.userService.addUser(user).subscribe((response: User) => {
-      console.log(response);
-    });
+    this.userService.addUser(user).subscribe();
     this.router.navigate(['/login']);
   }
 }
