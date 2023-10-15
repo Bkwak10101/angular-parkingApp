@@ -3,8 +3,13 @@
   <nav>
     <a mat-button routerLink="/reservation">New Reservation</a>
     <span class="nav-divider"></span>
-    <a mat-button (click)="findParking()" >Find Parking</a>
-    <a mat-button routerLink="/vehicle">Add Vehicle</a>
-    <a mat-button (click)="logOut()">Logout</a>
+    <a mat-button (click)="findParking()">Find Parking</a>
+    <a mat-button routerLink="/vehicle">New Vehicle</a>
+    <a mat-button (click)="logOut()">
+      <span class="logout">
+      Logout
+      <mat-icon fontIcon="exit_to_app"></mat-icon>
+      </span>
+    </a>
   </nav>
 </mat-toolbar>
