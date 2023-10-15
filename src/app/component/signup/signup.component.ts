@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -15,6 +15,7 @@ import {CommonModule, NgIf} from "@angular/common";
 import {HttpClient} from '@angular/common/http';
 import {UserService} from "../../services/user-client.service";
 import {User} from 'src/app/model/user';
+import {AppComponent} from "../../app.component";
 
 export function nameValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -56,8 +57,8 @@ export function passwordValidator(): ValidatorFn {
   styleUrls: ['./signup.component.css'],
   providers: [HttpClient]
 })
-export class SignupComponent {
-
+export class SignupComponent implements OnInit{
+  showNavbar = true;
   hide = true;
 
   userForm = this.fb.group({
@@ -73,7 +74,11 @@ export class SignupComponent {
   });
 
   constructor(private router: Router, private fb: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService, private appComponent: AppComponent) {
+  }
+
+  ngOnInit() {
+    this.appComponent.toggleNavbar()
   }
 
   addData() {
