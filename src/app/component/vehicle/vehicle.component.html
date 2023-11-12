@@ -1,1 +1,25 @@
-<p>vehicle works!</p>
+<div class="vehicle-container">
+  <mat-card class="vehicle-card">
+    <mat-card-content>
+      <mat-card-header>
+        <mat-card-title>New Vehicle</mat-card-title>
+      </mat-card-header>
+      <form (ngSubmit)="addVehicle()" [formGroup]="vehicleForm">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Select vehicle type</mat-label>
+            <mat-select formControlName="vehicleType">
+              <mat-option value="car">Car</mat-option>
+              <mat-option value="motorcycle">Motorcycle</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Enter registration</mat-label>
+            <input formControlName="registrationNum" matInput required>
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color=primary type="submit">Save vehicle</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
