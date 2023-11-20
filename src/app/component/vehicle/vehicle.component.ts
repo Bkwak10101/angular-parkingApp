@@ -3,8 +3,8 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MaterialModule} from "../../material.module";
 import {CommonModule, NgIf} from "@angular/common";
-import {Vehicle} from "../../model/vehicle";
 import {UserService} from "../../services/user-client.service";
+import {Vehicle} from "../../model/vehicle";
 
 @Component({
   selector: 'app-vehicle',
@@ -14,6 +14,12 @@ import {UserService} from "../../services/user-client.service";
   styleUrls: ['./vehicle.component.css']
 })
 export class VehicleComponent implements OnInit {
+  newVehicle: Vehicle = {
+    vehicleType: "",
+    registrationNum: null,
+    user_id: 1
+  }
+
   vehicleForm = this.fb.group({
     vehicleType: this.fb.control('', [Validators.required]),
     registrationNum: this.fb.control('', [Validators.required]),
@@ -27,13 +33,11 @@ export class VehicleComponent implements OnInit {
   }
 
   addVehicle() {
-    const vehicle: Vehicle = {
-      vehicleType: this.vehicleForm.get('vehicleType')?.value,
-      registrationNum: this.vehicleForm.get('registrationNum')?.value,
-      user_id: 1
-    };
 
-    this.userService.addVehicle(vehicle).subscribe();
+    this.newVehicle.vehicleType = this.vehicleForm.get('vehicleType')?.value as string;
+    this.newVehicle.registrationNum = this.vehicleForm.get('vehicleType')?.value;
+
+    this.userService.addVehicle(this.newVehicle).subscribe();
 
     // this.router.navigate(['/map']);
   }

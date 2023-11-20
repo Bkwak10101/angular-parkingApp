@@ -15,18 +15,18 @@ export class UserService {
   public addUser(user: User) {
     console.log(user)
     const headers = {'content-type': 'application/json'}
-    return this.http.post<any>(this.baseUrl + "/user/signup", user, {'headers': headers})
+    return this.http.post<User>(this.baseUrl + "/user/signup", user, {'headers': headers})
   }
 
   public addVehicle(vehicle: Vehicle) {
     console.log(vehicle);
     const headers = {'content-type': 'application/json'}
-    return this.http.post<any>(this.baseUrl + "/vehicle/createVehicle", vehicle, {'headers': headers})
+    return this.http.post<Vehicle>(this.baseUrl + "/vehicle/createVehicle", vehicle, {'headers': headers})
   }
 
   public validateLogin(user: User) {
     const headers = {'content-type': 'application/json'}
-    return this.http.post<any>(this.baseUrl + "/user/login", user, {'headers': headers})
+    return this.http.post<User>(this.baseUrl + "/user/login", user, {'headers': headers})
   }
 
   //TODO: LOGIN:

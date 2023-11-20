@@ -5,6 +5,10 @@ import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angula
 import {Router} from "@angular/router";
 import {AppComponent} from "../../app.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {Vehicle} from "../../model/vehicle";
+import {Reservation} from "../../model/reservation";
+import {Spot} from "../../model/spot";
+import {Parking} from "../../model/parking";
 
 @Component({
   selector: 'app-reservation',
@@ -14,6 +18,30 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent implements OnInit {
+
+  newVehicle: Vehicle = {
+    vehicleType: "",
+    registrationNum: null,
+    user_id: 1
+  }
+
+  newParking: Parking = {
+    name: "",
+    address: ""
+  }
+
+  newSpot: Spot = {
+  parking: this.newParking,
+  spotNumber: 0,
+  availability: true
+}
+
+  newReservation: Reservation = {
+    vehicle : this.newVehicle,
+    spot : this.newSpot,
+    dateStart: "",
+    dateEnd : ""
+  }
 
   constructor(private router: Router, private fb: FormBuilder, private appComponent: AppComponent) {
   }

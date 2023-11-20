@@ -2,10 +2,10 @@ import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angula
 import {Router} from '@angular/router';
 import {MaterialModule} from "../../material.module";
 import {UserService} from "../../services/user-client.service";
-import {User} from "../../model/user";
 import {Component, OnInit} from "@angular/core";
 import {passwordValidator} from "../signup/signup.component";
 import {AppComponent} from "../../app.component";
+import {User} from "../../model/user";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,15 @@ import {AppComponent} from "../../app.component";
 
 })
 
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
+  user: User = {
+    name: "",
+    surname: "",
+    password: "",
+    phone: 0,
+    email: ""
+  };
+
   showNavbar = true;
   loginForm = this.fb.group({
     password: this.fb.control('', [Validators.required, passwordValidator]),
@@ -29,19 +37,15 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.appComponent.toggleNavbar()
+    // this.appComponent.toggleNavbar()
   }
 
   sendCredentials() {
-    const user: User = {
-      name: null,
-      surname: null,
-      password: this.loginForm.get('password')?.value,
-      phone: null,
-      email: this.loginForm.get('email')?.value
-    };
+    this.user.password = this.loginForm.get('password')?.value as string;
+    this.user.email = this.loginForm.get('email')?.value as string;
+
     // console.log(user)
-    this.userService.validateLogin(user).subscribe();
+    this.userService.validateLogin(this.user).subscribe();
     this.router.navigate(['/map']);
   }
 

@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   showNavbar: boolean = true;
 
   toggleNavbar() {
-    this.showNavbar = !this.showNavbar;
+    this.showNavbar = false;
   }
 
   ngOnInit() {

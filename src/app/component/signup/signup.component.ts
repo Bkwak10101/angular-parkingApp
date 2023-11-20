@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -14,8 +14,7 @@ import {MaterialModule} from "../../material.module";
 import {CommonModule, NgIf} from "@angular/common";
 import {HttpClient} from '@angular/common/http';
 import {UserService} from "../../services/user-client.service";
-import {User} from 'src/app/model/user';
-import {AppComponent} from "../../app.component";
+import {User} from "../../model/user";
 
 export function nameValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -57,8 +56,15 @@ export function passwordValidator(): ValidatorFn {
   styleUrls: ['./signup.component.css'],
   providers: [HttpClient]
 })
-export class SignupComponent implements OnInit{
-  showNavbar = true;
+export class SignupComponent {
+  newUser: User = {
+    name: "",
+    surname: "",
+    password: "",
+    phone: 0,
+    email: ""
+  };
+
   hide = true;
 
   userForm = this.fb.group({
@@ -69,28 +75,31 @@ export class SignupComponent implements OnInit{
       Validators.minLength(4),
       nameValidator()]),
     password: this.fb.control('', [Validators.required, passwordValidator]),
-    phone: this.fb.control('', [Validators.required]),
+    phone: this.fb.control('', [Validators.required, Validators.pattern('^-?\\d+$')]),
     email: this.fb.control('', [Validators.required, Validators.email])
   });
 
   constructor(private router: Router, private fb: FormBuilder,
-              private userService: UserService, private appComponent: AppComponent) {
+              private userService: UserService) {
   }
 
-  ngOnInit() {
-    this.appComponent.toggleNavbar()
-  }
 
   addData() {
-    const user: User = {
-      name: this.userForm.get('name')?.value,
-      surname: this.userForm.get('surname')?.value,
-      password: this.userForm.get('password')?.value,
-      phone: this.userForm.get('phone')?.value,
-      email: this.userForm.get('email')?.value
-    };
+    this.newUser.name = this.userForm.get('name')?.value as string;
+    this.newUser.surname = this.userForm.get('surname')?.value as string;
+    this.newUser.password = this.userForm.get('password')?.value as string;
 
-    this.userService.addUser(user).subscribe();
+    // TODO: Refactoring possibility
+    const phoneControl = this.userForm.get('phone');
+    if (phoneControl && phoneControl.value !== null && phoneControl.value !== undefined) {
+      this.newUser.phone = +phoneControl.value;
+    } else {
+      this.newUser.phone = 0;
+    }
+
+    this.newUser.email = this.userForm.get('email')?.value as string;
+    this.userService.addUser(this.newUser).subscribe();
+
     this.router.navigate(['/login']);
   }
 }
