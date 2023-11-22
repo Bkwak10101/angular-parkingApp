@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
+  FormControl,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   ValidationErrors,
@@ -57,6 +58,33 @@ export function passwordValidator(): ValidatorFn {
   providers: [HttpClient]
 })
 export class SignupComponent {
+
+  hide = true;
+
+  public userForm = new FormGroup({
+    name: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(4),
+        nameValidator()], nonNullable: true
+    }),
+    surname: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(4),
+        nameValidator()], nonNullable: true
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, passwordValidator], nonNullable: true
+    }),
+    phone: new FormControl('', {
+      validators: [Validators.required, Validators.pattern('^-?\\d+$')], nonNullable: true
+    }),
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email], nonNullable: true
+    }),
+  });
+
+  constructor(private router: Router,
+              private userService: UserService) {
+  }
+
   newUser: User = {
     name: "",
     surname: "",
@@ -65,39 +93,14 @@ export class SignupComponent {
     email: ""
   };
 
-  hide = true;
-
-  userForm = this.fb.group({
-    name: this.fb.control('', [Validators.required,
-      Validators.minLength(4),
-      nameValidator()]),
-    surname: this.fb.control('', [Validators.required,
-      Validators.minLength(4),
-      nameValidator()]),
-    password: this.fb.control('', [Validators.required, passwordValidator]),
-    phone: this.fb.control('', [Validators.required, Validators.pattern('^-?\\d+$')]),
-    email: this.fb.control('', [Validators.required, Validators.email])
-  });
-
-  constructor(private router: Router, private fb: FormBuilder,
-              private userService: UserService) {
-  }
-
-
   addData() {
-    this.newUser.name = this.userForm.get('name')?.value as string;
-    this.newUser.surname = this.userForm.get('surname')?.value as string;
-    this.newUser.password = this.userForm.get('password')?.value as string;
+    this.newUser.name = this.userForm.controls.name.value;
+    this.newUser.surname = this.userForm.controls.surname.value;
+    this.newUser.password = this.userForm.controls.password.value;
+    this.newUser.phone = this.userForm.controls.phone.value as unknown as number;
+    this.newUser.email = this.userForm.controls.email.value;
 
-    // TODO: Refactoring possibility
-    const phoneControl = this.userForm.get('phone');
-    if (phoneControl && phoneControl.value !== null && phoneControl.value !== undefined) {
-      this.newUser.phone = +phoneControl.value;
-    } else {
-      this.newUser.phone = 0;
-    }
-
-    this.newUser.email = this.userForm.get('email')?.value as string;
+    console.log(this.newUser)
     this.userService.addUser(this.newUser).subscribe();
 
     this.router.navigate(['/login']);

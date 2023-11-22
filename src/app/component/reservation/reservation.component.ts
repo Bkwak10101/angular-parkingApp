@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MaterialModule} from "../../material.module";
 import {CommonModule, NgIf} from "@angular/common";
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AppComponent} from "../../app.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -9,6 +9,7 @@ import {Vehicle} from "../../model/vehicle";
 import {Reservation} from "../../model/reservation";
 import {Spot} from "../../model/spot";
 import {Parking} from "../../model/parking";
+import {ReservationService} from "../../services/reservation.service";
 
 @Component({
   selector: 'app-reservation',
@@ -31,37 +32,63 @@ export class ReservationComponent implements OnInit {
   }
 
   newSpot: Spot = {
-  parking: this.newParking,
-  spotNumber: 0,
-  availability: true
-}
+    parking: this.newParking,
+    spotNumber: 0,
+    availability: true
+  }
 
   newReservation: Reservation = {
-    vehicle : this.newVehicle,
-    spot : this.newSpot,
-    dateStart: "",
-    dateEnd : ""
+    vehicle: this.newVehicle,
+    spot: this.newSpot,
+    startDate: "",
+    endDate: "",
+    startTime: "",
+    endTime: ""
   }
 
-  constructor(private router: Router, private fb: FormBuilder, private appComponent: AppComponent) {
+  constructor(private router: Router, private appComponent: AppComponent,
+              private reservationService: ReservationService) {
   }
 
-  reservationForm = this.fb.group({
-    vehicle: this.fb.control('', [Validators.required]),
-    parking: this.fb.control('', [Validators.required]),
-    spot: this.fb.control('', [Validators.required,
-      Validators.minLength(1)]),
-    startDate: this.fb.control('', [Validators.required]),
-    endDate: this.fb.control('', [Validators.required]),
-    startTime: this.fb.control('', [Validators.required]),
-    endTime: this.fb.control('', [Validators.required]),
-  });
+  public reservationForm = new FormGroup({
+    vehicle: new FormControl('', {
+      validators: [Validators.required], nonNullable: true
+    }),
+    spot: new FormControl('', {
+      validators: [Validators.required], nonNullable: true
+    }),
+    startDate: new FormControl('', {
+      validators: [Validators.required], nonNullable: true
+    }),
+    endDate: new FormControl('', {
+      validators: [Validators.required], nonNullable: true
+    }),
+    startTime: new FormControl('', {
+      validators: [Validators.required], nonNullable: true
+    }),
+    endTime: new FormControl('', {
+      validators: [Validators.required], nonNullable: true
+    })
+  })
+
 
   ngOnInit() {
 
   }
 
+
+  //TODO: Fix Vehicle and Spot data models
   addReservation() {
+    this.newReservation.vehicle = this.reservationForm.controls.vehicle.value as unknown as Vehicle;
+    this.newReservation.spot = this.reservationForm.controls.spot.value as unknown as Spot;
+    this.newReservation.startDate = this.reservationForm.controls.vehicle.value;
+    this.newReservation.endDate = this.reservationForm.controls.vehicle.value;
+    this.newReservation.startTime = this.reservationForm.controls.vehicle.value;
+    this.newReservation.endTime = this.reservationForm.controls.vehicle.value;
+
+    console.log(this.newReservation)
+
+    this.reservationService.addReservation(this.newReservation).subscribe();
     this.router.navigate(['/map']);
   }
 }

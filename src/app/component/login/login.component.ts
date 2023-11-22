@@ -1,4 +1,4 @@
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from '@angular/router';
 import {MaterialModule} from "../../material.module";
 import {UserService} from "../../services/user-client.service";
@@ -26,13 +26,16 @@ export class LoginComponent implements OnInit {
   };
 
   showNavbar = true;
-  loginForm = this.fb.group({
-    password: this.fb.control('', [Validators.required, passwordValidator]),
-    email: this.fb.control('', [Validators.required, Validators.email])
+  public loginForm = new FormGroup({
+    password: new FormControl('', {
+      validators: [Validators.required, passwordValidator], nonNullable: true
+    }),
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email], nonNullable: true
+    })
   });
 
-
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService,
+  constructor(private router: Router, private userService: UserService,
               private appComponent: AppComponent) {
   }
 
@@ -41,8 +44,8 @@ export class LoginComponent implements OnInit {
   }
 
   sendCredentials() {
-    this.user.password = this.loginForm.get('password')?.value as string;
-    this.user.email = this.loginForm.get('email')?.value as string;
+    this.user.password = this.loginForm.controls.password.value;
+    this.user.email = this.loginForm.controls.email.value;
 
     // console.log(user)
     this.userService.validateLogin(this.user).subscribe();

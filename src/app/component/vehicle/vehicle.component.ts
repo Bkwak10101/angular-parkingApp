@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MaterialModule} from "../../material.module";
 import {CommonModule, NgIf} from "@angular/common";
 import {UserService} from "../../services/user-client.service";
@@ -20,12 +20,16 @@ export class VehicleComponent implements OnInit {
     user_id: 1
   }
 
-  vehicleForm = this.fb.group({
-    vehicleType: this.fb.control('', [Validators.required]),
-    registrationNum: this.fb.control('', [Validators.required]),
+  public vehicleForm = new FormGroup({
+    vehicleType: new FormControl('', {
+      validators: [Validators.required], nonNullable: true
+    }),
+    registrationNum: new FormControl('', {
+      validators: [Validators.required], nonNullable: true
+    }),
   });
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -34,11 +38,11 @@ export class VehicleComponent implements OnInit {
 
   addVehicle() {
 
-    this.newVehicle.vehicleType = this.vehicleForm.get('vehicleType')?.value as string;
-    this.newVehicle.registrationNum = this.vehicleForm.get('vehicleType')?.value;
+    this.newVehicle.vehicleType = this.vehicleForm.controls.vehicleType.value;
+    this.newVehicle.registrationNum = this.vehicleForm.controls.registrationNum.value;
 
     this.userService.addVehicle(this.newVehicle).subscribe();
 
-    // this.router.navigate(['/map']);
+    this.router.navigate(['/map']);
   }
 }

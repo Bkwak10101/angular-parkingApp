@@ -4,6 +4,8 @@ import {Spot} from "./spot";
 export interface Reservation{
   vehicle : Vehicle
   spot : Spot
-  dateStart: any
-  dateEnd :any
+  startDate: any,
+  endDate: any,
+  startTime: any,
+  endTime: any
 }
