@@ -1,7 +1,5 @@
-import {Parking} from "./parking";
-
 export interface Spot {
-  parking: Parking
+  parking_id: number
   spotNumber: number
   availability: boolean
 }

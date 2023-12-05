@@ -4,8 +4,8 @@ import {MaterialModule} from "../../material.module";
 import {UserService} from "../../services/user-client.service";
 import {Component, OnInit} from "@angular/core";
 import {passwordValidator} from "../signup/signup.component";
-import {AppComponent} from "../../app.component";
 import {User} from "../../model/user";
+import {NavbarService} from "../../services/navbar.service";
 
 @Component({
   selector: 'app-login',
@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
     phone: 0,
     email: ""
   };
+  hide = true;
 
-  showNavbar = true;
   public loginForm = new FormGroup({
     password: new FormControl('', {
       validators: [Validators.required, passwordValidator], nonNullable: true
@@ -36,11 +36,11 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private router: Router, private userService: UserService,
-              private appComponent: AppComponent) {
+              private navbarService: NavbarService) {
   }
 
   ngOnInit() {
-    // this.appComponent.toggleNavbar()
+    this.navbarService.hide();
   }
 
   sendCredentials() {
@@ -55,6 +55,4 @@ export class LoginComponent implements OnInit {
   goToSignUp() {
     this.router.navigate(['/signup']);
   }
-
-  hide = true;
 }

@@ -7,11 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'angular-parkingApp';
-  showNavbar: boolean = true;
 
-  toggleNavbar() {
-    this.showNavbar = false;
-  }
 
   ngOnInit() {
 
