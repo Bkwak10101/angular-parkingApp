@@ -21,7 +21,7 @@ export class UserService {
   public addVehicle(vehicle: Vehicle) {
     console.log(vehicle);
     const headers = {'content-type': 'application/json'}
-    return this.http.post<Vehicle>(this.baseUrl + "/vehicle/createVehicle", vehicle, {'headers': headers})
+    return this.http.post<Vehicle>(this.baseUrl + "/vehicle/create", vehicle, {'headers': headers})
   }
 
   public validateLogin(user: User) {

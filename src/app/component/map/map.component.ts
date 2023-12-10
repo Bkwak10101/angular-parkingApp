@@ -9,6 +9,19 @@ import {NavbarService} from "../../services/navbar.service";
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+
+  startMarker: any;
+  parkingLayer: any;
+
+  icon = {
+    icon: L.icon({
+      iconSize: [25, 41],
+      iconAnchor: [13, 0],
+      iconUrl: 'assets/icons/marker-icon.png',
+      shadowUrl: 'assets/icons/marker-shadow.png'
+    })
+  };
+
   constructor(private mapService: MapClientService, private navbarService: NavbarService) {
   }
 
@@ -25,11 +38,30 @@ export class MapComponent implements OnInit {
       attribution: 'Map data &copy; OpenStreetMap contributors', maxNativeZoom: 19, maxZoom: 30
     }).addTo(map);
 
+    this.startMarker = L.marker([50.0647, 19.9450], this.icon).addTo(map);
+    this.mapService.setStartMarker(this.startMarker);
+
     this.mapService.getMapData().subscribe(data => {
-      L.geoJSON(data).addTo(map);
+      this.parkingLayer = L.geoJSON(data).addTo(map);
+      this.mapService.setParkingLayer(this.parkingLayer);
       console.log(data);
     });
-
   }
 
+  // findNearestPolygon() {
+  //   let nearestDistance = Infinity;
+  //   let nearestPolygon = null;
+  //
+  //   this.parkingLayer.eachLayer((layer) => {
+  //     const polygon = layer.toGeoJSON();
+  //     const distance = turf.distance(this.startMarker, polygon);
+  //
+  //     if (distance < nearestDistance) {
+  //       nearestDistance = distance;
+  //       nearestPolygon = polygon;
+  //     }
+  //   });
+  //
+  //   return nearestPolygon;
+  // }
 }

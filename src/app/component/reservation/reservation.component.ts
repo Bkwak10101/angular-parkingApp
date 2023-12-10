@@ -96,7 +96,7 @@ export class ReservationComponent implements OnInit, Vehicle, Parking, Spot {
       });
     this.reservationService.addReservation(this.newReservation).subscribe();
 // }
-    this.router.navigate(['/map']);
+//     this.router.navigate(['/map']);
 
   }
 }
