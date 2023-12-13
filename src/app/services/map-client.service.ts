@@ -9,6 +9,7 @@ export class MapClientService {
 
   startMarker: any;
   parkingLayer: any;
+  parking: any;
 
   constructor(private httpClient: HttpClient) {
   }
@@ -21,25 +22,31 @@ export class MapClientService {
     this.parkingLayer = layer;
   }
 
+  setParking(parking: any) {
+    this.parking = parking;
+  }
+
   public getMapData(): Observable<any> {
     const url = 'assets/data/map.geojson';
     return this.httpClient.get(url);
   }
 //TODO: Fix parking finding
-  // findNearestPolygon() {
-  //   let nearestDistance = Infinity;
-  //   let nearestPolygon = null;
-  //
-  //   this.parkingLayer.eachLayer((layer) => {
-  //     const polygon = layer.toGeoJSON();
-  //     const distance = turf.distance(this.startMarker, polygon);
-  //
-  //     if (distance < nearestDistance) {
-  //       nearestDistance = distance;
-  //       nearestPolygon = polygon;
-  //     }
-  //   });
-  //
-  //   return nearestPolygon;
-  // }
+  findNearestPolygon() {
+    console.log(this.parking)
+  }
+//     let nearestDistance = Infinity;
+//     let nearestPolygon = null;
+//
+//     this.parkingLayer.eachLayer((layer) => {
+//       const polygon = layer.toGeoJSON();
+//       const distance = turf.distance(this.startMarker, polygon);
+//
+//       if (distance < nearestDistance) {
+//         nearestDistance = distance;
+//         nearestPolygon = polygon;
+//       }
+//     });
+//
+//     return nearestPolygon;
+//   }
 }

@@ -81,7 +81,7 @@ export class ReservationComponent implements OnInit, Vehicle, Parking, Spot {
   addReservation() {
     const vehicleId = this.reservationForm.controls.vehicle.value;
 
-    this.vehicleService.getVehicleById(Number(vehicleId))
+    this.vehicleService.getVehicleById(vehicleId)
       .subscribe((vehicle: Vehicle) => {
         this.newReservation.vehicle = vehicle;
 

@@ -11,8 +11,8 @@ export class VehicleService {
 
   constructor(private http: HttpClient) {}
 
-  getVehicleById(vehicleId: number): Observable<Vehicle> {
-    const url = `${this.baseUrl}/vehicles/${vehicleId}`;
+  getVehicleById(vehicleId: any): Observable<Vehicle> {
+    const url = `${this.baseUrl}/vehicle/${vehicleId}`;
     return this.http.get<Vehicle>(url);
   }
 }

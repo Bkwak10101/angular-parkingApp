@@ -12,6 +12,7 @@ export class MapComponent implements OnInit {
 
   startMarker: any;
   parkingLayer: any;
+  parking: any
 
   icon = {
     icon: L.icon({
@@ -45,7 +46,12 @@ export class MapComponent implements OnInit {
       this.parkingLayer = L.geoJSON(data).addTo(map);
       this.mapService.setParkingLayer(this.parkingLayer);
       console.log(data);
+      this.sendData(this.parking);
     });
+  }
+
+  sendData(data: any) {
+    this.mapService.setParking(data);
   }
 
   // findNearestPolygon() {

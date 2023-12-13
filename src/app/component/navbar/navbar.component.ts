@@ -20,8 +20,7 @@ export class NavbarComponent implements OnDestroy {
   }
 
   findParking() {
-    // this.mapClientService.findNearestPolygon
-
+    this.mapClientService.findNearestPolygon()
     console.log("Closest parking found!")
   }
 
