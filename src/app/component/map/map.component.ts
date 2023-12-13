@@ -45,6 +45,7 @@ export class MapComponent implements OnInit {
     this.mapService.getMapData().subscribe(data => {
       this.parkingLayer = L.geoJSON(data).addTo(map);
       this.mapService.setParkingLayer(this.parkingLayer);
+      this.parking = data;
       console.log(data);
       this.sendData(this.parking);
     });
