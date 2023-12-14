@@ -12,16 +12,6 @@ export class MapComponent implements OnInit {
 
   startMarker: any;
   parkingLayer: any;
-  parking: any
-
-  icon = {
-    icon: L.icon({
-      iconSize: [25, 41],
-      iconAnchor: [13, 0],
-      iconUrl: 'assets/icons/marker-icon.png',
-      shadowUrl: 'assets/icons/marker-shadow.png'
-    })
-  };
 
   constructor(private mapService: MapClientService, private navbarService: NavbarService) {
   }
@@ -31,23 +21,20 @@ export class MapComponent implements OnInit {
     const map = L.map('map', {
       center: [50.0647, 19.9450],
       zoom: 20,
-
-
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; OpenStreetMap contributors', maxNativeZoom: 19, maxZoom: 30
     }).addTo(map);
 
-    this.startMarker = L.marker([50.0647, 19.9450], this.icon).addTo(map);
+    this.startMarker = L.marker([50.0647, 19.9450]).addTo(map);
     this.mapService.setStartMarker(this.startMarker);
 
     this.mapService.getMapData().subscribe(data => {
       this.parkingLayer = L.geoJSON(data).addTo(map);
       this.mapService.setParkingLayer(this.parkingLayer);
-      this.parking = data;
       console.log(data);
-      this.sendData(this.parking);
+      this.sendData(data);
     });
   }
 

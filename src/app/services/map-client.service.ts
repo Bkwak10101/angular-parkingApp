@@ -30,7 +30,7 @@ export class MapClientService {
     const url = 'assets/data/map.geojson';
     return this.httpClient.get(url);
   }
-//TODO: Fix parking finding
+//TODO: Fix parking finding - Leaflet flyToBounds function
   findNearestPolygon() {
     console.log(this.parking)
   }
