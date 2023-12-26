@@ -7,7 +7,6 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {Vehicle} from "../../model/vehicle";
 import {Reservation} from "../../model/reservation";
 import {Spot} from "../../model/spot";
-import {Parking} from "../../model/parking";
 import {ReservationService} from "../../services/reservation.service";
 import {VehicleService} from "../../services/vehicle.service";
 import {NavbarService} from "../../services/navbar.service";
@@ -19,7 +18,7 @@ import {NavbarService} from "../../services/navbar.service";
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.css']
 })
-export class ReservationComponent implements OnInit, Vehicle, Parking, Spot {
+export class ReservationComponent implements OnInit, Vehicle, Spot {
 
   registrationNum: any;
   user_id: number = 1;
@@ -30,13 +29,14 @@ export class ReservationComponent implements OnInit, Vehicle, Parking, Spot {
   address: string = "";
 
   // spot
-  parking_id: number = 0;
-  spotNumber: number = 0;
   availability: boolean = true;
+
+  spot_id:number = 1;
+  spotNumber:number = 1;
 
   newReservation: Reservation = {
     vehicle: {} as Vehicle,
-    spot_id: 0,
+    spot: "",
     startDate: "",
     endDate: ""
     // startTime: "",
@@ -46,6 +46,8 @@ export class ReservationComponent implements OnInit, Vehicle, Parking, Spot {
   constructor(private router: Router, private navbarService: NavbarService,
               private reservationService: ReservationService, private vehicleService: VehicleService) {
   }
+
+
 
   public reservationForm = new FormGroup({
     vehicle: new FormControl('', {
@@ -86,7 +88,8 @@ export class ReservationComponent implements OnInit, Vehicle, Parking, Spot {
         this.newReservation.vehicle = vehicle;
 
         // this.newReservation.vehicle_id = Number(this.reservationForm.controls.vehicle_id.value);
-        this.newReservation.spot_id = Number(this.reservationForm.controls.spot.value);
+        this.newReservation.vehicle = this.reservationForm.controls.vehicle.value as unknown as Vehicle;
+        this.newReservation.spot = this.reservationForm.controls.spot.value;
         this.newReservation.startDate = this.reservationForm.controls.startDate.value;
         this.newReservation.endDate = this.reservationForm.controls.endDate.value;
         // this.newReservation.startTime = this.reservationForm.controls.startTime.value;

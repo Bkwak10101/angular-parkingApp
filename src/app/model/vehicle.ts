@@ -1,5 +1,6 @@
 export interface Vehicle {
+  // vehicle_id: number
   vehicleType: string
-  registrationNum: any
+  registrationNum: string
   user_id: number
 }

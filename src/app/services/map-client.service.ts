@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import * as turf from '@turf/turf'
+
 @Injectable({
   providedIn: 'root'
 })
 export class MapClientService {
 
+  mapInstance: L.Map | undefined;
   startMarker: any;
   parkingLayer: any;
   parking: any;
@@ -26,27 +27,33 @@ export class MapClientService {
     this.parking = parking;
   }
 
+  setMapInstance(map: L.Map) {
+    this.mapInstance = map;
+  }
+
   public getMapData(): Observable<any> {
     const url = 'assets/data/map.geojson';
     return this.httpClient.get(url);
   }
-//TODO: Fix parking finding - Leaflet flyToBounds function
+
+//TODO: Implement distance check
   findNearestPolygon() {
     console.log(this.parking)
+
+    if (this.mapInstance && this.parkingLayer) {
+      const bounds = this.parkingLayer.getBounds();
+      const options: L.FitBoundsOptions = {
+        padding: [50, 50]
+      };
+      this.flyToPolygon(bounds, options);
+    }
   }
-//     let nearestDistance = Infinity;
-//     let nearestPolygon = null;
-//
-//     this.parkingLayer.eachLayer((layer) => {
-//       const polygon = layer.toGeoJSON();
-//       const distance = turf.distance(this.startMarker, polygon);
-//
-//       if (distance < nearestDistance) {
-//         nearestDistance = distance;
-//         nearestPolygon = polygon;
-//       }
-//     });
-//
-//     return nearestPolygon;
-//   }
+
+  private flyToPolygon(bounds: L.LatLngBounds, options: L.FitBoundsOptions) {
+    if (this.mapInstance) {
+      this.mapInstance.flyToBounds(bounds, options);
+    } else {
+      console.error('Map instance not available.');
+    }
+  }
 }

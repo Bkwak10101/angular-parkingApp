@@ -16,7 +16,7 @@ import {Vehicle} from "../../model/vehicle";
 export class VehicleComponent implements OnInit {
   newVehicle: Vehicle = {
     vehicleType: "",
-    registrationNum: null,
+    registrationNum: "",
     user_id: 1
   }
 

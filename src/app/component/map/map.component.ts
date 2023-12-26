@@ -26,7 +26,7 @@ export class MapComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; OpenStreetMap contributors', maxNativeZoom: 19, maxZoom: 30
     }).addTo(map);
-
+    L.Icon.Default.imagePath = "assets/leaflet/"
     this.startMarker = L.marker([50.0647, 19.9450]).addTo(map);
     this.mapService.setStartMarker(this.startMarker);
 
@@ -36,26 +36,10 @@ export class MapComponent implements OnInit {
       console.log(data);
       this.sendData(data);
     });
+    this.mapService.setMapInstance(map);
   }
 
   sendData(data: any) {
     this.mapService.setParking(data);
   }
-
-  // findNearestPolygon() {
-  //   let nearestDistance = Infinity;
-  //   let nearestPolygon = null;
-  //
-  //   this.parkingLayer.eachLayer((layer) => {
-  //     const polygon = layer.toGeoJSON();
-  //     const distance = turf.distance(this.startMarker, polygon);
-  //
-  //     if (distance < nearestDistance) {
-  //       nearestDistance = distance;
-  //       nearestPolygon = polygon;
-  //     }
-  //   });
-  //
-  //   return nearestPolygon;
-  // }
 }
