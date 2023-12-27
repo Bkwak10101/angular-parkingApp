@@ -9,7 +9,7 @@ export class MapClientService {
 
   mapInstance: L.Map | undefined;
   startMarker: any;
-  parkingLayer: any;
+  parkingLayer: any[] = [];
   parking: any;
 
   constructor(private httpClient: HttpClient) {
@@ -31,8 +31,7 @@ export class MapClientService {
     this.mapInstance = map;
   }
 
-  public getMapData(): Observable<any> {
-    const url = 'assets/data/map.geojson';
+  public getMapData(url: string): Observable<any> {
     return this.httpClient.get(url);
   }
 
@@ -40,12 +39,27 @@ export class MapClientService {
   findNearestPolygon() {
     console.log(this.parking)
 
-    if (this.mapInstance && this.parkingLayer) {
-      const bounds = this.parkingLayer.getBounds();
+    if (this.mapInstance && this.startMarker && this.parkingLayer.length >= 2) {
+      const startLatLng = this.startMarker.getLatLng();
+      let minDistance = Infinity;
+      let nearestParkingBounds = this.parkingLayer[0].getBounds();
+
+      for (let i = 1; i < this.parkingLayer.length; i++) {
+        const parkingBounds = this.parkingLayer[i].getBounds();
+        const center = parkingBounds.getCenter();
+        const distance = startLatLng.distanceTo(center);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestParkingBounds = parkingBounds;
+        }
+      }
+
       const options: L.FitBoundsOptions = {
         padding: [50, 50]
       };
-      this.flyToPolygon(bounds, options);
+
+      this.flyToPolygon(nearestParkingBounds, options);
     }
   }
 

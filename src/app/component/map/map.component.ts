@@ -11,7 +11,7 @@ import {NavbarService} from "../../services/navbar.service";
 export class MapComponent implements OnInit {
 
   startMarker: any;
-  parkingLayer: any;
+  parkingLayer: any[] = [];
 
   constructor(private mapService: MapClientService, private navbarService: NavbarService) {
   }
@@ -26,20 +26,30 @@ export class MapComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; OpenStreetMap contributors', maxNativeZoom: 19, maxZoom: 30
     }).addTo(map);
-    L.Icon.Default.imagePath = "assets/leaflet/"
+    L.Icon.Default.imagePath = "assets/icons/"
     this.startMarker = L.marker([50.0647, 19.9450]).addTo(map);
     this.mapService.setStartMarker(this.startMarker);
 
-    this.mapService.getMapData().subscribe(data => {
-      this.parkingLayer = L.geoJSON(data).addTo(map);
-      this.mapService.setParkingLayer(this.parkingLayer);
-      console.log(data);
-      this.sendData(data);
+    let pathArr = ['assets/data/map.geojson', 'assets/data/map2.geojson']
+    pathArr.forEach((url) => {
+      this.mapService.getMapData(url).subscribe(data => {
+        this.pushParking(data, map);
+        console.log(data);
+        console.log(this.parkingLayer)
+        this.sendData(data);
+      });
     });
+
     this.mapService.setMapInstance(map);
   }
 
   sendData(data: any) {
     this.mapService.setParking(data);
   }
+
+  pushParking(data:any, map: any){
+    this.parkingLayer.push(L.geoJSON(data).addTo(map))
+    this.mapService.setParkingLayer(this.parkingLayer);
+  }
+
 }
