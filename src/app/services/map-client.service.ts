@@ -3,71 +3,66 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class MapClientService {
 
-  mapInstance: L.Map | undefined;
-  startMarker: any;
-  parkingLayer: any[] = [];
-  parking: any;
+    mapInstance: L.Map | undefined;
+    startMarker: any;
+    parkingLayer: any[] = [];
 
-  constructor(private httpClient: HttpClient) {
-  }
+    constructor(private httpClient: HttpClient) {
+    }
 
-  setStartMarker(marker: any) {
-    this.startMarker = marker;
-  }
+    setStartMarker(marker: any) {
+        this.startMarker = marker;
+    }
 
-  setParkingLayer(layer: any) {
-    this.parkingLayer = layer;
-  }
+    setParkingLayer(layer: any) {
+        this.parkingLayer = layer;
+    }
 
-  setParking(parking: any) {
-    this.parking = parking;
-  }
 
-  setMapInstance(map: L.Map) {
-    this.mapInstance = map;
-  }
+    setMapInstance(map: L.Map) {
+        this.mapInstance = map;
+    }
 
-  public getMapData(url: string): Observable<any> {
-    return this.httpClient.get(url);
-  }
+    public getMapData(url: string): Observable<any> {
+        return this.httpClient.get(url);
+    }
 
 //TODO: Implement distance check
-  findNearestPolygon() {
-    console.log(this.parking)
+    findNearestPolygon() {
 
-    if (this.mapInstance && this.startMarker && this.parkingLayer.length >= 2) {
-      const startLatLng = this.startMarker.getLatLng();
-      let minDistance = Infinity;
-      let nearestParkingBounds = this.parkingLayer[0].getBounds();
+        if (this.mapInstance && this.startMarker && this.parkingLayer.length >= 2) {
+            const startLatLng = this.startMarker.getLatLng();
+            let minDistance = Infinity;
+            let nearestParkingBounds = this.parkingLayer[0].getBounds();
 
-      for (let i = 1; i < this.parkingLayer.length; i++) {
-        const parkingBounds = this.parkingLayer[i].getBounds();
-        const center = parkingBounds.getCenter();
-        const distance = startLatLng.distanceTo(center);
+            for (let i = 1; i < this.parkingLayer.length; i++) {
+                const parkingBounds = this.parkingLayer[i].getBounds();
+                const center = parkingBounds.getCenter();
+                const distance = startLatLng.distanceTo(center);
 
-        if (distance < minDistance) {
-          minDistance = distance;
-          nearestParkingBounds = parkingBounds;
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestParkingBounds = parkingBounds;
+                }
+            }
+
+            const options: L.FitBoundsOptions = {
+                padding: [50, 50]
+            };
+
+            this.flyToPolygon(nearestParkingBounds, options);
         }
-      }
-
-      const options: L.FitBoundsOptions = {
-        padding: [50, 50]
-      };
-
-      this.flyToPolygon(nearestParkingBounds, options);
     }
-  }
 
-  private flyToPolygon(bounds: L.LatLngBounds, options: L.FitBoundsOptions) {
-    if (this.mapInstance) {
-      this.mapInstance.flyToBounds(bounds, options);
-    } else {
-      console.error('Map instance not available.');
+    private flyToPolygon(bounds: L.LatLngBounds, options: L.FitBoundsOptions) {
+        if (this.mapInstance) {
+            this.mapInstance.flyToBounds(bounds, options);
+        } else {
+            console.error('Map instance not available.');
+        }
     }
-  }
 }
