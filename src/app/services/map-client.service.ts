@@ -77,7 +77,12 @@ export class MapClientService {
     this.parkingLayer.forEach(parking => {
       const spots = parking.getLayers();
       spots.forEach((spot: any) => {
-        spot.bindPopup(`ID: ${spot.feature.properties.ID}`);
+        spot.bindPopup(`
+        <div class="popup" style="text-align: center;">
+          <div>Spot: ${spot.feature.properties.ID}</div>
+          <a class="custom-button" href="http://localhost:4200/reservation" target="_blank">Add reservation</a>
+        </div>
+      `);
         spot.setStyle({fillColor: 'green', color: 'green'});
       })
     });
