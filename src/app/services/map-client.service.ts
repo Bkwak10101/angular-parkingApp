@@ -41,7 +41,9 @@ export class MapClientService {
 
     this.parkingLayer.forEach(layer => {
       const parkingCenter = layer.getBounds().getCenter();
-      const distance = turf.distance([startLatLng.lat, startLatLng.lng], [parkingCenter.lat, parkingCenter.lng]);
+      const distance = turf.distance(
+        [startLatLng.lat, startLatLng.lng],
+        [parkingCenter.lat, parkingCenter.lng]);
 
       if (distance < closestParking?.distance) {
         closestParking = {
@@ -69,5 +71,15 @@ export class MapClientService {
     } else {
       console.error('Map instance not available.');
     }
+  }
+
+  changeSpotsColor() {
+    this.parkingLayer.forEach(parking => {
+      const spots = parking.getLayers();
+      spots.forEach((spot: any) => {
+        spot.bindPopup(`ID: ${spot.feature.properties.ID}`);
+        spot.setStyle({fillColor: 'green', color: 'green'});
+      })
+    });
   }
 }
