@@ -7,10 +7,12 @@ import * as turf from '@turf/turf';
   providedIn: 'root'
 })
 export class MapClientService {
-
+  data: any;
   mapInstance: L.Map | undefined;
   startMarker: any;
   parkingLayer: any[] = [];
+  availableSpotIds: number[] = []
+  private baseUrl = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -73,17 +75,49 @@ export class MapClientService {
     }
   }
 
-  changeSpotsColor() {
+  getAvailableSpots(): Observable<any[]> {
+    const url = `${this.baseUrl}/spot/available`;
+    return this.httpClient.get<any[]>(url);
+  }
+
+  fetchAndColorAvailableSpots(): void {
+    this.getAvailableSpots().subscribe(
+      (greenSpots) => {
+        this.availableSpotIds = greenSpots.map((spot: any) => spot.spot_id);
+        this.colorParkingSpots(greenSpots);
+      },
+      (error) => {
+        console.error('Error fetching available spots:', error);
+      }
+    );
+  }
+
+  colorParkingSpots(greenSpots: any[]): void {
     this.parkingLayer.forEach(parking => {
       const spots = parking.getLayers();
       spots.forEach((spot: any) => {
-        spot.bindPopup(`
-        <div class="popup" style="text-align: center;">
-          <div>Spot: ${spot.feature.properties.ID}</div>
-          <a class="custom-button" href="http://localhost:4200/reservation" target="_blank">Add reservation</a>
-        </div>
-      `);
-        spot.setStyle({fillColor: 'green', color: 'green'});
+        const matchingSpot = greenSpots.find(greenSpot => greenSpot.spot_id === spot.feature.properties.ID);
+        if (matchingSpot) {
+          this.colorSpot(spot);
+        }
+      });
+    });
+  }
+
+  colorSpot(spot: any): void {
+    spot.bindPopup(`
+    <div class="popup" style="text-align: center;">
+      <div>Spot: ${spot.feature.properties.ID}</div>
+      <a class="custom-button" href="http://localhost:4200/reservation" target="_blank">Add reservation</a>
+    </div>`);
+    spot.setStyle({fillColor: 'green', color: 'green'});
+  }
+
+  colorUnavailableSpots() {
+    this.parkingLayer.forEach(parking => {
+      const spots = parking.getLayers();
+      spots.forEach((spot: any) => {
+        spot.setStyle({fillColor: 'red', color: 'red'});
       })
     });
   }

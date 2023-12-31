@@ -37,7 +37,8 @@ export class MapComponent implements OnInit {
 
     forkJoin(observables).subscribe(datas => {
       datas.forEach(data => this.pushParking(data, map));
-      this.mapService.changeSpotsColor();
+      this.mapService.fetchAndColorAvailableSpots();
+      this.mapService.colorUnavailableSpots();
     });
 
     this.mapService.setMapInstance(map);

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Router} from "@angular/router";
 import {NavbarService} from "../../services/navbar.service";
 import {Subscription} from "rxjs";
@@ -9,7 +9,7 @@ import {MapClientService} from "../../services/map-client.service";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnDestroy {
   showNavbar: boolean = true;
   subscription: Subscription;
 
@@ -17,10 +17,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscription = this.navbarService.showNavbar.subscribe((value) => {
       this.showNavbar = value;
     });
-  }
-
-  ngOnInit() {
-    this.mapClientService.changeSpotsColor();
   }
 
   findParking() {
