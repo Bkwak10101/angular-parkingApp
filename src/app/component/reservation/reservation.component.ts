@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MaterialModule} from "../../material.module";
 import {CommonModule, NgIf} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {Vehicle} from "../../model/vehicle";
 import {Reservation} from "../../model/reservation";
@@ -14,7 +14,7 @@ import {NavbarService} from "../../services/navbar.service";
 @Component({
   selector: 'app-reservation',
   standalone: true,
-  imports: [MaterialModule, NgIf, FormsModule, ReactiveFormsModule, CommonModule, MatDatepickerModule],
+  imports: [MaterialModule, NgIf, FormsModule, ReactiveFormsModule, CommonModule, MatDatepickerModule, RouterLink],
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.css']
 })
@@ -31,8 +31,8 @@ export class ReservationComponent implements OnInit, Vehicle, Spot {
   // spot
   availability: boolean = true;
 
-  spot_id:number = 1;
-  spotNumber:number = 1;
+  spot_id: number = 1;
+  spotNumber: number = 1;
 
   newReservation: Reservation = {
     vehicle: {} as Vehicle,
@@ -43,10 +43,9 @@ export class ReservationComponent implements OnInit, Vehicle, Spot {
 // endTime: ""
   }
 
-  constructor(private router: Router, private navbarService: NavbarService,
+  constructor(private route: ActivatedRoute, private router: Router, private navbarService: NavbarService,
               private reservationService: ReservationService, private vehicleService: VehicleService) {
   }
-
 
 
   public reservationForm = new FormGroup({
@@ -76,6 +75,13 @@ export class ReservationComponent implements OnInit, Vehicle, Spot {
 
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const parking = params['parking'];
+      const spot = params['spot'];
+      if (parking && spot) {
+        this.reservationForm.patchValue({parking, spot});
+      }
+    });
   }
 
 
@@ -99,7 +105,6 @@ export class ReservationComponent implements OnInit, Vehicle, Spot {
       });
     this.reservationService.addReservation(this.newReservation).subscribe();
 // }
-//     this.router.navigate(['/map']);
-
+    this.router.navigate(['/map']);
   }
 }

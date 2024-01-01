@@ -14,11 +14,8 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Select parking</mat-label>
-            <mat-select formControlName="parking">
-              <mat-option value="1">Parking Stradom</mat-option>
-              <mat-option value="2">Parking Pod Wawelem</mat-option>
-            </mat-select>
+            <mat-label>Parking name</mat-label>
+            <input formControlName="parking" matInput required>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Parking spot</mat-label>
@@ -45,6 +42,7 @@
           <!--            <mat-icon matSuffix>schedule</mat-icon>-->
           <!--          </mat-form-field>-->
         </div>
+        <button mat-stroked-button color="warn" [routerLink]="['/map']">Cancel</button>
         <button mat-raised-button color=primary type="submit">Create reservation</button>
       </form>
     </mat-card-content>

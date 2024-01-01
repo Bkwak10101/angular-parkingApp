@@ -4,7 +4,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 1
+        "ID": 1,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [
@@ -37,7 +38,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 2
+        "ID": 2,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [
@@ -70,7 +72,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 3
+        "ID": 3,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [
@@ -103,7 +106,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 4
+        "ID": 4,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [
@@ -136,7 +140,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 5
+        "ID": 5,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [
@@ -169,7 +174,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 6
+        "ID": 6,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [
@@ -202,7 +208,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 7
+        "ID": 7,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [
@@ -235,7 +242,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 8
+        "ID": 8,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [
@@ -268,7 +276,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 9
+        "ID": 9,
+        "Parking": "Parking 24H Kraków"
         },
       "geometry": {
         "coordinates": [
@@ -301,7 +310,8 @@
     {
       "type": "Feature",
       "properties": {
-        "ID": 10
+        "ID": 10,
+        "Parking": "Parking 24H Kraków"
       },
       "geometry": {
         "coordinates": [

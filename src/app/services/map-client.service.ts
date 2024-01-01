@@ -105,10 +105,13 @@ export class MapClientService {
   }
 
   colorSpot(spot: any): void {
+    console.log(spot)
+    const parkingName = encodeURIComponent(spot.feature.properties.Parking);
+
     spot.bindPopup(`
-    <div class="popup" style="text-align: center;">
+    <div class="popup">
       <div>Spot: ${spot.feature.properties.ID}</div>
-      <a class="custom-button" href="http://localhost:4200/reservation" target="_blank">Add reservation</a>
+      <a class="custom-button" href="http://localhost:4200/reservation?parking=${parkingName}&spot=${spot.feature.properties.ID}" target="_blank">Add reservation</a>
     </div>`);
     spot.setStyle({fillColor: 'green', color: 'green'});
   }
