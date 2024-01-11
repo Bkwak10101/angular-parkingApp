@@ -11,5 +11,19 @@
       <mat-icon fontIcon="exit_to_app"></mat-icon>
       </span>
     </a>
+<!--    <a mat-button class = "profile" routerLink="/profile">-->
+<!--      <span class="profile-icon">-->
+<!--        My profile-->
+<!--        <mat-icon>account_circle</mat-icon>-->
+<!--      </span>-->
+<!--    </a>-->
+    <button mat-button class = "profile" (click)="openProfileSidenav()">
+      <span class="profile-icon">
+        My profile
+        <mat-icon>account_circle</mat-icon>
+      </span>
+    </button>
   </nav>
 </mat-toolbar>
+
+

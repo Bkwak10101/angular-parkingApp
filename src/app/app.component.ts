@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatSidenav} from "@angular/material/sidenav";
+import {NavbarService} from "./services/navbar.service";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +10,10 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'angular-parkingApp';
 
+  @ViewChild('sidenav', {static: true}) public sidenav!: MatSidenav;
+
+  constructor() {
+  }
 
   ngOnInit() {
 

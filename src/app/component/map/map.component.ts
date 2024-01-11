@@ -1,16 +1,28 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import * as L from 'leaflet';
 import {forkJoin} from 'rxjs';
 import {MapClientService} from '../../services/map-client.service';
 import {NavbarService} from "../../services/navbar.service";
 import {ParkingService} from "../../services/parking.service";
-
+import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MaterialModule} from "../../material.module";
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  standalone: true,
+  imports: [MatSidenavModule, MatButtonModule, MatExpansionModule, MaterialModule],
 })
 export class MapComponent implements OnInit {
+
+
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  close() {
+    this.sidenav.close();
+  }
 
   startMarker: any;
   parkingLayer: any[] = [];

@@ -8,3 +8,14 @@
   align-items: center;
   gap: 3px;
 }
+.profile-icon{
+  right:10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.profile{
+  position: absolute;
+  right:10px;
+}

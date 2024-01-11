@@ -1,2 +1,39 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
-<div id="map"></div>
+<mat-sidenav-container
+  class="example-container" (backdropClick)="close()">
+  <mat-sidenav position="end" #sidenav (keydown.escape)="close()" disableClose>
+    <p><button mat-button (click)="close()">Toggle</button></p>
+          <mat-accordion class="example-headers-align">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Your reservations
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Your vehicles
+                </mat-panel-title>
+                <mat-panel-description>
+                  Type the country name
+                  <mat-icon> directions_car</mat-icon>
+                  <mat-icon>motorcycle</mat-icon>
+                  <mat-icon>map</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+            <mat-action-row>
+              <button mat-button color="warn">Previous</button>
+              <button mat-button color="primary">End</button>
+            </mat-action-row>
+          </mat-accordion>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <button #openb mat-button (click)="sidenav.open()">Open</button>
+    <div id="map"></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

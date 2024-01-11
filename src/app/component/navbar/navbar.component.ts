@@ -1,8 +1,9 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {NavbarService} from "../../services/navbar.service";
 import {Subscription} from "rxjs";
 import {MapClientService} from "../../services/map-client.service";
+import {MatSidenav} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +14,21 @@ export class NavbarComponent implements OnDestroy {
   showNavbar: boolean = true;
   subscription: Subscription;
 
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
   constructor(private router: Router, private navbarService: NavbarService, private mapClientService: MapClientService) {
     this.subscription = this.navbarService.showNavbar.subscribe((value) => {
       this.showNavbar = value;
     });
+  }
+
+  openProfileSidenav() {
+    // console.log("OPEN")
+    if (this.sidenav) {
+      this.sidenav.open();
+    }
+    // this.openButton.nativeElement.open(this.sidenav);
+
   }
 
   findParking() {

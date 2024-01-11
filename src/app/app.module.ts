@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NavbarComponent} from "./component/navbar/navbar.component";
 import {MaterialModule} from "./material.module";
+import {ProfileComponent} from "./component/profile/profile.component";
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import {MaterialModule} from "./material.module";
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    ProfileComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
