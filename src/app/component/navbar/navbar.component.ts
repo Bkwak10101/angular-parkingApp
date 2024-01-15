@@ -1,48 +1,43 @@
-import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
-import {NavbarService} from "../../services/navbar.service";
+import {Component, OnDestroy} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
+import {MatIconModule} from "@angular/material/icon";
+import {MatAnchor} from "@angular/material/button";
+import {MatToolbar} from "@angular/material/toolbar";
 import {Subscription} from "rxjs";
+import {NavbarService} from "../../services/navbar.service";
 import {MapClientService} from "../../services/map-client.service";
-import {MatSidenav} from "@angular/material/sidenav";
+import {HttpClientModule} from "@angular/common/http";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
+  imports: [MatIconModule, MatAnchor, MatToolbar, HttpClientModule, CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrl: './navbar.component.css',
+  providers: []
 })
 export class NavbarComponent implements OnDestroy {
   showNavbar: boolean = true;
   subscription: Subscription;
 
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-
-  constructor(private router: Router, private navbarService: NavbarService, private mapClientService: MapClientService) {
+  constructor(private router: Router,
+              private navbarService: NavbarService,
+              private mapClientService: MapClientService) {
     this.subscription = this.navbarService.showNavbar.subscribe((value) => {
       this.showNavbar = value;
     });
   }
 
-  openProfileSidenav() {
-    // console.log("OPEN")
-    if (this.sidenav) {
-      this.sidenav.open();
-    }
-    // this.openButton.nativeElement.open(this.sidenav);
-
-  }
-
   findParking() {
     this.mapClientService.findNearestParking()
-    console.log("Closest parking found!")
   }
 
   logOut() {
-    console.log("User logged out successfully")
     this.router.navigate(['/login']);
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe()
   }
-
 }

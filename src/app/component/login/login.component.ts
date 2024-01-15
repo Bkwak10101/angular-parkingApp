@@ -1,16 +1,33 @@
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from '@angular/router';
-import {MaterialModule} from "../../material.module";
 import {UserService} from "../../services/user-client.service";
 import {Component, OnInit} from "@angular/core";
-import {passwordValidator} from "../signup/signup.component";
 import {User} from "../../model/user";
 import {NavbarService} from "../../services/navbar.service";
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatIcon} from "@angular/material/icon";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatInput} from "@angular/material/input";
+import {passwordValidator} from "../signup/signup.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardContent,
+    MatCardHeader,
+    MatCardTitle,
+    MatFormField,
+    MatLabel,
+    MatIcon,
+    MatCard,
+    MatButton,
+    MatIconButton,
+    MatInput
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 
@@ -53,6 +70,7 @@ export class LoginComponent implements OnInit {
   }
 
   goToSignUp() {
+    this.navbarService.display();
     this.router.navigate(['/signup']);
   }
 }

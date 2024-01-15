@@ -1,21 +1,24 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSidenav} from "@angular/material/sidenav";
-import {NavbarService} from "./services/navbar.service";
+import {Component} from '@angular/core';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {NavbarComponent} from "./component/navbar/navbar.component";
+import {MapComponent} from "./component/map/map.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    NavbarComponent,
+    MapComponent,
+    RouterLink,
+    RouterLinkActive,
+    CommonModule
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.css'
+
 })
-export class AppComponent implements OnInit {
-  title = 'angular-parkingApp';
-
-  @ViewChild('sidenav', {static: true}) public sidenav!: MatSidenav;
-
-  constructor() {
-  }
-
-  ngOnInit() {
-
-  }
+export class AppComponent {
+  title = 'park';
 }

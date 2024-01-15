@@ -2,8 +2,8 @@ import {Vehicle} from "./vehicle";
 import {Spot} from "./spot";
 
 export interface Reservation{
-  vehicle: Vehicle,
-  spot: string,
+  vehicle_id: Vehicle,
+  spots: Spot[],
   startDate: any,
   endDate: any,
   // startTime: any,

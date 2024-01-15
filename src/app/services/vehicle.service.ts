@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Vehicle} from "../model/vehicle";
 
@@ -9,10 +9,26 @@ import {Vehicle} from "../model/vehicle";
 export class VehicleService {
   private baseUrl = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  getVehicleById(vehicleId: any): Observable<Vehicle> {
-    const url = `${this.baseUrl}/vehicle/${vehicleId}`;
-    return this.http.get<Vehicle>(url);
+  getVehicleByRegistrationNum(registrationNum: String): Observable<Vehicle> {
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    });
+
+    return this.http.get<Vehicle>(`${this.baseUrl}/vehicle/num/${registrationNum}`, {headers});
+  }
+
+  getAllVehicles(): Observable<Vehicle[]> {
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    });
+
+    return this.http.get<Vehicle[]>(`${this.baseUrl}/vehicle/all`, {headers});
   }
 }

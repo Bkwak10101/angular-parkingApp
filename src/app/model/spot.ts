@@ -2,7 +2,7 @@ import {Parking} from "./parking";
 
 export interface Spot {
   spot_id: number
-  // parking: Parking
+  parking: Parking
   spotNumber: number
   availability: boolean
 }

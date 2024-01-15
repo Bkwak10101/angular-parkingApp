@@ -9,7 +9,7 @@
           <mat-form-field>
             <mat-label>Enter your email</mat-label>
             <input formControlName = "email" matInput placeholder="user@example.com" required>
-<!--            <mat-error>{{getErrorMessage()}}</mat-error>-->
+            <!--            <mat-error>{{getErrorMessage()}}</mat-error>-->
           </mat-form-field>
           <mat-form-field>
             <mat-label>Enter your password</mat-label>
@@ -20,7 +20,7 @@
             </button>
           </mat-form-field>
         </div>
-        <button mat-stroked-button  type="submit" class="login-button">Log in</button>
+        <button mat-stroked-button color=primary type="submit" class="login-button">Log in</button>
       </form>
       <button mat-raised-button color=primary (click)="goToSignUp()">Sign up</button>
     </mat-card-content>

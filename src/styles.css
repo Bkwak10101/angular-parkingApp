@@ -1,7 +1,5 @@
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-/*Popup styles*/
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow:hidden }
 
 .popup {
   text-align: center;

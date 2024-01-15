@@ -1,29 +1,15 @@
 <mat-toolbar *ngIf="showNavbar" color="primary">
   <span class="app-title">Parking app</span>
   <nav>
-    <a mat-button routerLink="/reservation">New Reservation</a>
+    <a mat-button routerLink="/reservation" routerLinkActive="active">New Reservation</a>
     <span class="nav-divider"></span>
     <a mat-button (click)="findParking()">Find Parking</a>
-    <a mat-button routerLink="/vehicle">New Vehicle</a>
+    <a mat-button routerLink="/vehicle" routerLinkActive="active">New Vehicle</a>
     <a mat-button (click)="logOut()">
-      <span class="logout">
-      Logout
-      <mat-icon fontIcon="exit_to_app"></mat-icon>
-      </span>
+            <span class="logout">
+                Logout
+                <mat-icon fontIcon="exit_to_app"></mat-icon>
+            </span>
     </a>
-<!--    <a mat-button class = "profile" routerLink="/profile">-->
-<!--      <span class="profile-icon">-->
-<!--        My profile-->
-<!--        <mat-icon>account_circle</mat-icon>-->
-<!--      </span>-->
-<!--    </a>-->
-    <button mat-button class = "profile" (click)="openProfileSidenav()">
-      <span class="profile-icon">
-        My profile
-        <mat-icon>account_circle</mat-icon>
-      </span>
-    </button>
   </nav>
 </mat-toolbar>
-
-

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -11,11 +11,15 @@ import {
 } from "@angular/forms";
 
 import {Router} from '@angular/router';
-import {MaterialModule} from "../../material.module";
 import {CommonModule, NgIf} from "@angular/common";
-import {HttpClient} from '@angular/common/http';
 import {UserService} from "../../services/user-client.service";
 import {User} from "../../model/user";
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {NavbarService} from "../../services/navbar.service";
 
 export function nameValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -52,12 +56,26 @@ export function passwordValidator(): ValidatorFn {
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [MaterialModule, NgIf, FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    NgIf,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatCardTitle,
+    MatCardHeader,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatIconButton,
+    MatIcon,
+    MatButton,
+    MatCardContent,
+    MatCard
+  ],
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
-  providers: [HttpClient]
+  styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit{
 
   hide = true;
 
@@ -82,7 +100,8 @@ export class SignupComponent {
   });
 
   constructor(private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private navbarService: NavbarService) {
   }
 
   newUser: User = {
@@ -93,6 +112,10 @@ export class SignupComponent {
     email: ""
   };
 
+  ngOnInit() {
+    this.navbarService.hide();
+  }
+
   addData() {
     this.newUser.name = this.userForm.controls.name.value;
     this.newUser.surname = this.userForm.controls.surname.value;
@@ -100,7 +123,7 @@ export class SignupComponent {
     this.newUser.phone = this.userForm.controls.phone.value as unknown as number;
     this.newUser.email = this.userForm.controls.email.value;
 
-    console.log(this.newUser)
+    // console.log(this.newUser)
     this.userService.addUser(this.newUser).subscribe();
 
     this.router.navigate(['/login']);

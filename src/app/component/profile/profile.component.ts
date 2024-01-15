@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
@@ -23,7 +22,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSidenavModule,
+    MatSidenavModule
   ],
 })
 export class ProfileComponent implements OnInit{

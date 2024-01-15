@@ -9,8 +9,9 @@
           <mat-form-field>
             <mat-label>Select your vehicle</mat-label>
             <mat-select formControlName="vehicle">
-              <mat-option value="1">KRA 12345</mat-option>
-              <mat-option value="2">KRA 67890</mat-option>
+              <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.registrationNum">
+                {{ vehicle.registrationNum }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
@@ -22,10 +23,10 @@
             <input formControlName="spot" matInput required>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Pick reservation date</mat-label>
+            <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker">
-              <input matStartDate placeholder="Start date" formControlName="startDate">
-              <input matEndDate placeholder="End date" formControlName="endDate">
+              <input matStartDate placeholder="Start date">
+              <input matEndDate placeholder="End date">
             </mat-date-range-input>
             <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>

@@ -5,6 +5,7 @@
       "type": "Feature",
       "properties": {
         "ID": 1,
+        "Spot": 1,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -39,6 +40,7 @@
       "type": "Feature",
       "properties": {
         "ID": 2,
+        "Spot": 2,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -73,6 +75,7 @@
       "type": "Feature",
       "properties": {
         "ID": 3,
+        "Spot": 3,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -107,6 +110,7 @@
       "type": "Feature",
       "properties": {
         "ID": 4,
+        "Spot": 4,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -141,6 +145,7 @@
       "type": "Feature",
       "properties": {
         "ID": 5,
+        "Spot": 5,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -175,6 +180,7 @@
       "type": "Feature",
       "properties": {
         "ID": 6,
+        "Spot": 6,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -209,6 +215,7 @@
       "type": "Feature",
       "properties": {
         "ID": 7,
+        "Spot": 7,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -243,6 +250,7 @@
       "type": "Feature",
       "properties": {
         "ID": 8,
+        "Spot": 8,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -277,40 +285,7 @@
       "type": "Feature",
       "properties": {
         "ID": 9,
-        "Parking": "Parking 24H Kraków"
-        },
-      "geometry": {
-        "coordinates": [
-          [
-            [
-              19.94323286795165,
-              50.0573980850576
-            ],
-            [
-              19.94318859921583,
-              50.05737842912666
-            ],
-            [
-              19.943206803181965,
-              50.057360632532976
-            ],
-            [
-              19.943251485644026,
-              50.05737975723008
-            ],
-            [
-              19.94323286795165,
-              50.0573980850576
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "ID": 10,
+        "Spot": 9,
         "Parking": "Parking 24H Kraków"
       },
       "geometry": {
@@ -335,6 +310,41 @@
             [
               19.943280385950146,
               50.05742187992095
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID": 10,
+        "Spot": 10,
+        "Parking": "Parking 24H Kraków"
+        },
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              19.94323286795165,
+              50.0573980850576
+            ],
+            [
+              19.94318859921583,
+              50.05737842912666
+            ],
+            [
+              19.943206803181965,
+              50.057360632532976
+            ],
+            [
+              19.943251485644026,
+              50.05737975723008
+            ],
+            [
+              19.94323286795165,
+              50.0573980850576
             ]
           ]
         ],
