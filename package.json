@@ -1,5 +1,5 @@
 {
-  "name": "park",
+  "name": "angular-parking-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
