@@ -58,6 +58,6 @@ export class VehicleComponent{
 
     this.userService.addVehicle(this.newVehicle).subscribe();
 
-    this.router.navigate(['/map']);
+    this.router.navigate(['/profile']);
   }
 }

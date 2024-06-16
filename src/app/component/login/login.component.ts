@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 
     // console.log(user)
     this.userService.validateLogin(this.user).subscribe();
-    this.router.navigate(['/map']);
+    this.router.navigate(['/profile']);
   }
 
   goToSignUp() {

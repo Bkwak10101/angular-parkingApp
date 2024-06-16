@@ -6,6 +6,14 @@ import {SignupComponent} from "./component/signup/signup.component";
 import {LoginComponent} from "./component/login/login.component";
 import {ProfileComponent} from "./component/profile/profile.component";
 
+export class RouteData {
+  menuButtonVisible: boolean;
+
+  constructor(menuButtonVisible: boolean) {
+    this.menuButtonVisible = menuButtonVisible;
+  }
+}
+
 export const routes: Routes = [
   {
     path: '',

@@ -45,7 +45,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
   ],
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.css'],
-  providers: [ReservationService,
+  providers: [
+    ReservationService,
     VehicleService,
     NavbarService,
     ParkingService,
@@ -151,6 +152,6 @@ export class ReservationComponent implements OnInit {
         this.mapService.colorUnavailableSpots();
       });
     });
-    this.router.navigate(['/map']);
+    this.router.navigate(['/profile']);
   }
 }

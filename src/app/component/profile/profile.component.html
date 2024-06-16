@@ -1,37 +1,38 @@
-<!--<mat-sidenav-container class="sidenav-container">-->
-<!--  <mat-sidenav #sidenav mode="side" [opened]="showProfile">-->
+<mat-sidenav-container class="sidenav-container" autosize>
+  <mat-sidenav [ngClass]="!isCollapsed ? 'expanded' : ''"
+               [mode]="isMobile ? 'over' : 'side'" position="end">
 
-<!--    <div class="profile-container">-->
-<!--      <mat-accordion class="example-headers-align">-->
-<!--        <mat-expansion-panel>-->
-<!--          <mat-expansion-panel-header>-->
-<!--            <mat-panel-title>-->
-<!--              Your reservations-->
-<!--            </mat-panel-title>-->
-<!--          </mat-expansion-panel-header>-->
-<!--        </mat-expansion-panel>-->
+    <div class="profile-container">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Your reservations
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
 
-<!--        <mat-expansion-panel>-->
-<!--          <mat-expansion-panel-header>-->
-<!--            <mat-panel-title>-->
-<!--              Your vehicles-->
-<!--            </mat-panel-title>-->
-<!--            <mat-panel-description>-->
-<!--              Type the country name-->
-<!--              <mat-icon> directions_car</mat-icon>-->
-<!--              <mat-icon>motorcycle</mat-icon>-->
-<!--              <mat-icon>map</mat-icon>-->
-<!--            </mat-panel-description>-->
-<!--          </mat-expansion-panel-header>-->
-<!--        </mat-expansion-panel>-->
-<!--        <mat-action-row>-->
-<!--          <button mat-button color="warn">Previous</button>-->
-<!--          <button mat-button color="primary">End</button>-->
-<!--        </mat-action-row>-->
-<!--      </mat-accordion>-->
-<!--    </div>-->
-<!--  </mat-sidenav>-->
-<!--  <mat-sidenav-content>-->
-<!--    <div id="map" class="map-container"></div>-->
-<!--  </mat-sidenav-content>-->
-<!--</mat-sidenav-container>-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Your vehicles
+            </mat-panel-title>
+            <mat-panel-description>
+              Type the country name
+              <mat-icon> directions_car</mat-icon>
+              <mat-icon>motorcycle</mat-icon>
+              <mat-icon>map</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-action-row>
+          <button mat-button color="warn">Previous</button>
+          <button mat-button color="primary">End</button>
+        </mat-action-row>
+      </mat-accordion>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-map></app-map>
+  </mat-sidenav-content>
+</mat-sidenav-container>
