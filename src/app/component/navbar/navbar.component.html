@@ -1,21 +1,23 @@
-<mat-toolbar *ngIf="showNavbar" color="primary">
-  <span class="app-title">Parking app</span>
-  <nav>
-    <button mat-button routerLink="/reservation" routerLinkActive="active">New Reservation</button>
-    <span class="nav-divider"></span>
-    <button mat-button (click)="findParking()">Find Parking</button>
-    <button mat-button routerLink="/vehicle" routerLinkActive="active">New Vehicle</button>
-    <button mat-button (click)="logOut()">
-      <span class="logout">
-        Logout
-        <mat-icon fontIcon="exit_to_app"></mat-icon>
-      </span>
-    </button>
-  </nav>
+@if (showNavbar) {
+  <mat-toolbar color="primary">
+    <span class="app-title">Parking app</span>
+    <nav>
+      <button mat-button routerLink="/reservation" routerLinkActive="active">New Reservation</button>
+      <span class="nav-divider"></span>
+      <button mat-button (click)="findParking()">Find Parking</button>
+      <button mat-button routerLink="/vehicle" routerLinkActive="active">New Vehicle</button>
+      <button mat-button (click)="logOut()">
+        <span class="logout">
+          Logout
+          <mat-icon fontIcon="exit_to_app"></mat-icon>
+        </span>
+      </button>
+    </nav>
     <button mat-button class="profile" (click)="sidenavService.menuButtonClick.next()">
       <span class="profile-icon">
         My profile
         <mat-icon>account_circle</mat-icon>
       </span>
     </button>
-</mat-toolbar>
+  </mat-toolbar>
+}

@@ -5,12 +5,11 @@ import {MapClientService} from '../../services/map-client.service';
 import {NavbarService} from "../../services/navbar.service";
 import {ParkingService} from "../../services/parking.service";
 import {HttpClientModule} from "@angular/common/http";
-import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [HttpClientModule, CommonModule],
+  imports: [HttpClientModule],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
   providers: [ParkingService]

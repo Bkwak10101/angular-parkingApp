@@ -1,10 +1,20 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from "@angular/forms";
 import {UserService} from "../../services/user-client.service";
 import {Vehicle} from "../../model/vehicle";
-import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {
+  MatCard,
+  MatCardContent,
+  MatCardHeader,
+  MatCardTitle
+} from "@angular/material/card";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatInput} from "@angular/material/input";
@@ -14,7 +24,6 @@ import {MatButton} from "@angular/material/button";
   selector: 'app-vehicle',
   standalone: true,
   imports: [
-    NgIf,
     FormsModule,
     ReactiveFormsModule,
     MatCardTitle,
@@ -27,7 +36,7 @@ import {MatButton} from "@angular/material/button";
     MatCard,
     MatInput,
     MatButton
-  ],
+],
   templateUrl: './vehicle.component.html',
   styleUrls: ['./vehicle.component.css'],
   providers: [UserService]

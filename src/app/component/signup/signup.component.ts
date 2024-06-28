@@ -11,7 +11,6 @@ import {
 } from "@angular/forms";
 
 import {Router} from '@angular/router';
-import {CommonModule, NgIf} from "@angular/common";
 import {UserService} from "../../services/user-client.service";
 import {User} from "../../model/user";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
@@ -57,10 +56,8 @@ export function passwordValidator(): ValidatorFn {
   selector: 'app-signup',
   standalone: true,
   imports: [
-    NgIf,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
     MatCardTitle,
     MatCardHeader,
     MatFormField,
@@ -71,7 +68,7 @@ export function passwordValidator(): ValidatorFn {
     MatButton,
     MatCardContent,
     MatCard
-  ],
+],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })

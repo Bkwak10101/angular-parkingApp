@@ -7,7 +7,6 @@ import {Subscription} from "rxjs";
 import {NavbarService} from "../../services/navbar.service";
 import {MapClientService} from "../../services/map-client.service";
 import {HttpClientModule} from "@angular/common/http";
-import {CommonModule} from "@angular/common";
 import {SidenavService} from "../../services/sidenav.service";
 
 @Component({
@@ -18,12 +17,11 @@ import {SidenavService} from "../../services/sidenav.service";
     MatAnchor,
     MatToolbar,
     HttpClientModule,
-    CommonModule,
     RouterLink,
     RouterLinkActive,
     MatIconButton,
     MatButton
-  ],
+],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   providers: []

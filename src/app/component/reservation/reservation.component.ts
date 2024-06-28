@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonModule, NgIf} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {VehicleService} from "../../services/vehicle.service";
@@ -24,10 +23,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
   selector: 'app-reservation',
   standalone: true,
   imports: [
-    NgIf,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
     RouterLink,
     MatCardHeader,
     MatCardContent,
